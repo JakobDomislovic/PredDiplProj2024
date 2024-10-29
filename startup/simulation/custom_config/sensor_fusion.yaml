@@ -1,0 +1,58 @@
+estimation_frequency: 100
+expected_imu_dt: 0.02
+
+Q_acc_x: 0.0001
+Q_acc_y: 0.0001
+Q_acc_z: 0.0001
+Q_angular_x: 0.00001
+Q_angular_y: 0.00001
+Q_angular_z: 0.00001
+
+pose_p_cov: 0.01
+vel_p_cov: 0.001
+angle_p_cov: 0.01
+
+p_drift_p_cov: 0.0001
+q_drift_p_cov: 0.0001
+
+estimate_acc_bias: true
+acc_bias_var: [ 0.001,0.001,0.001]
+acc_bias_p_cov: 0.001
+
+estimate_gyro_bias: true
+gyro_bias_var: [ 0.001,0.001,0.001]
+gyro_bias_p_cov: 0.001
+
+estimate_gravity: true
+g: [0,0,-10.34]
+g_p_cov: 0.1
+
+#position sensor params
+Sensor_prefix: [gps, imu]
+initial_sensor: gps
+
+#gps
+gps_R_pose: [0.01001, 0.01001, 0.01001]
+gps_is_orientation_sensor: false
+gps_estimate_drift: false
+gps_is_velocity_sensor: false
+gps_topic: /hawk1/mavros/local_position/pose
+gps_msg_type: 2 # Pose stamped
+#gps_rotation: [0.0, 1.0, 0.0,1.0, 0.0, 0,0, 0.0, 1.0]
+gps_rotation: [1.0, 0.0, 0.0,  0.0, 1.0, 0.0,  0.0, 0.0, 1.0]
+gps_translation: [0,0,0]
+gps_origin_at_first_measurement: false
+gps_position_outlier_lim: [100, 100, 100]
+
+#imu
+imu_R_angle: [0.000001, 0.000001, 0.000001]
+imu_is_orientation_sensor: true
+imu_is_position_sensor: false
+imu_estimate_drift: false
+imu_is_velocity_sensor: false
+imu_topic: /hawk1/mavros/imu/data
+imu_msg_type: 3 # IMU message
+imu_rotation: [1.0, 0.0, 0.0,  0.0, 1.0, 0.0,  0.0, 0.0, 1.0]
+imu_translation: [0,0,0]
+imu_origin_at_first_measurement: false
+imu_orientation_outlier_lim: [100, 100, 100]

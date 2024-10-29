@@ -103,15 +103,19 @@ Na ovoj razini dovoljno je pratiti naredbe koje će biti u sljedećem poglavlju.
     ```
 6. README.md unutar svojeg direktorija koristite kao dnevnik rada (weekly report). Ne napraviti ništa je isto ok ako postoji valjani razlog :-). 
 7. U nastavku ćemo stvoriti docker container koji će se koristiti za simulaciju, sve skripte su unaprijed pripremljene, samo ih pokrenite.
-8. Stvaranje slike iz Dockerfilea, to jest buildanje:
+8. U terminal upišite naredbu (radi uštede vremena ovo napravite doma prije sami):
+    ```bash
+    docker pull lmark1/uav_ros_simulation:focal-bin-0.2.1
+    ```
+9. Stvaranje slike iz Dockerfilea, to jest buildanje:
     ```bash
     ./docker_build.sh
     ```
-9. Prvo pokretanje i stvaranje containera:
+10. Prvo pokretanje i stvaranje containera:
     ```bash
     ./first_docker_run.sh
     ```
-10. Nadalje pokrećite simulaciju sa:
+11. Nadalje pokrećite simulaciju sa:
     ```bash
     ./start_docker.sh
     ```
@@ -126,6 +130,13 @@ S obzirom da su roboti skupi, a i uvijek smo kratki s vremenom, praksa je da se 
 
 ### TMUX
 Glavne stvari kako se kretati u tmux i zašto se koristi.
+Navigacija unutar tmux-a može biti izazovna, ali uz nekoliko osnovnih naredbi, postaje vrlo jednostavna. Jedna od najkorisnijih funkcionalnosti je korištenje `ctrl` + strelica za kretanje između prozora:
+
+- `ctrl` + strelica lijevo/desno: Prebacivanje između horizontalno podijeljenih prozora.
+- `ctrl` + strelica gore/dolje: Prebacivanje između vertikalno podijeljenih prozora.
+
+Ove naredbe omogućuju brzu i efikasnu navigaciju unutar tmux sesije, što je posebno korisno kada radite s više prozora istovremeno.
+### VS Code with docker
 
 ## Hands-on #2 
 

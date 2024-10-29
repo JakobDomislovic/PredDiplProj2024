@@ -1,0 +1,87 @@
+---
+node:
+  name: 'state_machine'
+  rate: 50
+
+subscribers:
+  carrot_status: 'carrot/status'
+  object_pose: 'pose'
+  localization: '/hawkgreen/odometry'
+  gripper_state: 'uav_arm/dynamixel_state'
+  tracker_state: 'tracker/status'
+
+publishers:
+  state: 'state_machine/state' 
+  tracker_pose: 'tracker/input_pose'
+  tracker_trajectory: 'tracker/input_trajectory'
+
+services:
+  gripper_open: 'uav_gripper_open'
+  land: 'uav_manager/land'
+  takeoff: 'uav_manager/takeoff'
+  heatmap:
+    start: '/hawkgreen/heatmap/start'
+    reset: '/hawkgreen/heatmap/reset'
+    stop: '/hawkgreen/heatmap/stop'
+    result: '/hawkgreen/heatmap/result/small'
+  mpc_tracker_parameters: 'mpc_tracker/set_parameters'
+  state_machine_start: 'state_machine/start'
+  end_of_first_mission: '/small_object_done'
+  emergency_stop: '/small_object/emergency_stop'
+
+threshold:
+  global:
+    x: 0.25
+    y: 0.25
+    z: 2.0
+    angle: 15
+  local:
+    x: 0.15
+    y: 0.15
+    z: 2.0
+    angle: 15
+
+goto_height: 2.0
+height_above_package: 1.0
+takeoff_height: 2.0
+takeoff_threshold: 0.4
+
+trajectory_params:
+  search:
+    vel_xy: 2.5
+    acc_xy: 1.5
+    vel_z: 0.5
+    acc_z: 0.5
+  grasp:
+    vel_xy: 2.0
+    acc_xy: 1.0
+    vel_z: 0.3
+    acc_z: 0.3
+  
+timers:
+  planning: 2
+  lower: 1
+  land: 1
+  grasp: 5
+  drop: 1
+  home: 2
+
+trajectories:
+  search_1:
+    # [x, y, z, yaw]
+    - [ 2, 2, 2.0, -1.0]
+    - [ 2,-2, 2.0, -1.0]
+    - [-2,-2, 2.0, -1.0]
+    - [-2, 2, 2.0, -1.0]    
+  end_1:
+    # [x, y, z, yaw]
+    - [0.0, 0.0, 1.0, -1.0]
+  search_2:
+    # [x, y, z, yaw]
+    - [ 2, 2, 2.0, -1.0]
+    - [ 2,-2, 2.0, -1.0]
+    - [-2,-2, 2.0, -1.0]
+    - [-2, 2, 2.0, -1.0]    
+  end_2:
+    # [x, y, z, yaw]
+    - [0.0, 0.0, 1.0, -1.0]

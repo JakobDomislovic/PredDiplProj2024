@@ -1,0 +1,39 @@
+name: simulation
+root: ./
+startup_window: status
+pre_window: export UAV_NAMESPACE=duckorange && source <%= @settings["setup_name"] %>
+windows:
+  - roscore:
+      layout: tiled
+      panes:
+        - roscore
+        - export SITL_RITW_TERMINAL="tmux new-window -n:ardupilot1"; waitForRos; roslaunch ardupilot_gazebo sim_vehicle.launch enable_console:=false
+        - waitForRos; rosparam set use_sim_time true; roslaunch ardupilot_gazebo mavros.launch 
+  - gazebo:
+      layout: tiled
+      panes:
+        - waitForRos; roslaunch ardupilot_gazebo kopterworx.launch use_sim_time:=true
+  - arm&takeof:
+      layout: tiled
+      panes:
+        - waitForRos; waitForOdometry; rosrun ardupilot_gazebo automatic_takeoff.sh
+  - control:
+      layout: tiled
+      panes:
+        - waitForRos; waitForOdometry; roslaunch uav_ros_control pid_carrot.launch
+          odometry:=$ODOM_TOPIC
+          local_callback_enable:=true
+          default_params:=$CONTROL_PARAMS
+          control_type:=$CONTROL_TYPE
+          carrot_config:=$CARROT_PARAMS
+  - trajectory:
+      layout: tiled
+      panes:
+        - waitForRos; waitForOdometry; roslaunch uav_ros_tracker mpc_tracker.launch
+  - status:
+      layout: tiled
+      panes:
+        - waitForRos; 
+        - waitForRos; rostopic echo /$UAV_NAMESPACE/carrot/status
+        - waitForRos; rostopic echo /$UAV_NAMESPACE/tracker/status
+        - waitForRos; rostopic echo /$UAV_NAMESPACE/tracker/remaining_trajectory
