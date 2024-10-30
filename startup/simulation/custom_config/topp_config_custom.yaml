@@ -7,17 +7,13 @@ topp_tracker:
   constraints:
 
     velocity:
-      x: 0.25
-      y: 0.25
-      z: 0.25
-      yaw: 0.25
-      roll: 0.25
-      pitch: 0.25
+      x: 5
+      y: 5
+      z: 5
+      yaw: 2.5
 
     acceleration:
-      x: 0.25
-      y: 0.25
-      z: 0.25
-      yaw: 0.2
-      roll: 0.2
-      pitch: 0.2
+      x: 1.5
+      y: 1.5
+      z: 1.0
+      yaw: 1.5

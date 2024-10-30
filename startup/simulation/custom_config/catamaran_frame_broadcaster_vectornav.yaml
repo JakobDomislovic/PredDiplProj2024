@@ -1,4 +1,0 @@
-catamaran_frame_broadcaster:
-  source_frame_id: "eagle/ekf"
-  child_frame_id: "eagle/ekf_rotated"
-  non_mavros_imu: True

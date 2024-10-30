@@ -1,7 +1,7 @@
 FROM lmark1/uav_ros_simulation:focal-bin-0.2.1
 
 ARG HOME=/root
-ARG CATKIN_WORKSPACE=uav_ws
+ARG CATKIN_WORKSPACE=sim_ws
 ARG USER=root
 
 RUN apt-get install openssh-client git
