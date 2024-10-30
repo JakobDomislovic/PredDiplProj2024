@@ -129,17 +129,19 @@ Stack je stavljen u docker container te se može lako preuzeti, u njemu su osnov
 S obzirom da su roboti skupi, a i uvijek smo kratki s vremenom, praksa je da se u robotici sve prvo isproba u simulaciji. Zato ćemo mi koristiti isti taj stack, ali već pretvoren u simulaciju.
 
 ### TMUX
-Glavne stvari kako se kretati u tmux i zašto se koristi.
-Navigacija unutar tmux-a može biti izazovna, ali uz nekoliko osnovnih naredbi, postaje vrlo jednostavna. Jedna od najkorisnijih funkcionalnosti je korištenje `ctrl` + strelica za kretanje između prozora:
-
-- `ctrl` + strelica lijevo/desno: Prebacivanje između horizontalno podijeljenih prozora.
-- `ctrl` + strelica gore/dolje: Prebacivanje između vertikalno podijeljenih prozora.
-
-Ove naredbe omogućuju brzu i efikasnu navigaciju unutar tmux sesije, što je posebno korisno kada radite s više prozora istovremeno.
-### VS Code with docker
+[Tutorail za tmux](https://github.com/larics/uav_ros_simulation/blob/main/HOWTO.md).
 
 ## Hands-on #2 
-
+1. Klonirati repozitorij simulacijskog stacka.
+    ```bash
+    git clone git@github.com:larics/uav_ros_simulation.git
+    ```
+2. Potrebno je prije svega instalirati stack, pozicionirajte se u ~/uav_ros_simulation
+    ```bash
+    cd uav_ros_simulation
+    ./installation/dependencies/docker.sh
+    ```
+3. 
 
 Citirati:
 ```@article{Markovic2023TowardsAS,

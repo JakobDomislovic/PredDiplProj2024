@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DOCKERFILE=Dockerfile
-IMAGE_NAME=preddiplproj2024_img
+IMAGE_NAME=preddiplproj2024
 
 distro="noetic"
 ros_distro="focal"

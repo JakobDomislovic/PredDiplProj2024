@@ -24,11 +24,4 @@ ARG ROS_HOSTNAME=localhost.local
 ARG ROS_MASTER_URI=http://localhost.local:11311
 ARG ROS_IP=localhost.local
 
-RUN echo " \
-export ROS_HOSTNAME=$ROS_HOSTNAME" >> $HOME/.bashrc
-RUN echo " \
-export ROS_MASTER_URI=$ROS_MASTER_URI" >> $HOME/.bashrc
-RUN echo " \
-export ROS_IP=$ROS_IP" >> $HOME/.bashrc
-
 WORKDIR $HOME/$CATKIN_WORKSPACE/src/PredDiplProj2024
