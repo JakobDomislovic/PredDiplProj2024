@@ -81,12 +81,12 @@ Na ovoj razini dovoljno je pratiti naredbe koje će biti u sljedećem poglavlju.
     cd PredDiplProj2024/
     ```
 2. Podijela u tri tima:
-    - Gripper
-    - PathPlanning
-    - RobotVision
+    - gripper
+    - trajectory
+    - vision
 3. Svaki tim (voditelj tima) neka napravi direktorij (folder) unutar repozitorija:
     ```bash
-    mkdir Gripper
+    mkdir gripper
     ```
 4. Uđite u repozitorij, napravite README.md te u njega zapišite ime time i članove:
     ```bash
@@ -111,13 +111,9 @@ Na ovoj razini dovoljno je pratiti naredbe koje će biti u sljedećem poglavlju.
     ```bash
     ./docker_build.sh
     ```
-10. Prvo pokretanje i stvaranje containera:
+10. Pokretanje containera (PRVI PUT OBAVEZNO, dalje preporuceno koristiti ovu skriptu):
     ```bash
-    ./first_docker_run.sh
-    ```
-11. Nadalje pokrećite simulaciju sa:
-    ```bash
-    ./start_docker.sh
+    ./docker_run.sh
     ```
 
 ## Flight stack
@@ -132,16 +128,48 @@ S obzirom da su roboti skupi, a i uvijek smo kratki s vremenom, praksa je da se 
 [Tutorail za tmux](https://github.com/larics/uav_ros_simulation/blob/main/HOWTO.md).
 
 ## Hands-on #2 
-1. Klonirati repozitorij simulacijskog stacka.
+1. Simulacija se pokreće u startup-u. Startup koristimo za različite situacije, npr. testiramo u simulaciji, nakon toga isti kod želimo testirati u laboratoriju i onda opet taj isti kod negdje u šumi. U startup-u ćemo efektivno mjenjati "svijet" i ponašanje letjelice.
+
     ```bash
-    git clone git@github.com:larics/uav_ros_simulation.git
+    ./startup/simulation/start.sh
     ```
-2. Potrebno je prije svega instalirati stack, pozicionirajte se u ~/uav_ros_simulation
+
+2. Gibajte se kroz tmux da pohvatate komande.
+
+3. Na topic `/UAV_NAMESPACE/tracker/input_pose` posaljite tocku na koju zelite da letjelica ide. Koji je UAV_NAMESPACE?
+
+3. Ugasite tmux.
+
+4. Timovi (voditelji timova) *trajectory* i *vision* neka od svojih direktorija naprave ROS paket. Primjer:
     ```bash
-    cd uav_ros_simulation
-    ./installation/dependencies/docker.sh
+    catkin_create_pkg gripper std_msgs rospy roscpp
     ```
-3. 
+5. Uđite u novo napravljeni paket iz koraka 4.
+    ```bash
+    cd gripper
+    ```
+6. Paket je potrebno buildati:
+    ```bash
+    catkin build --this
+    ```
+7. Da bi globalno mogli vidjeti svoj paket, moramo ga sourceati:
+    ```bash
+    roscd sim_ws
+    source devel/setup.bash
+    ```
+8. Testirajte je li dobro sourceano sa (ako nalazi je ok, ako ne imamo grešku):
+    ```bash
+    roscd gripper
+    ```
+9. Timovi koji su radili paket sada trebaju pushati svoje promijene. Ponavljam **.git** datoteka se nalazi u glavnom direktoriju PredDiplProj2024 i stoga se uvijek morate pozicionirati tamo kada nešto pushate.
+    ```bash
+    git status # pogledajte promijene
+    git add .
+    git commit -m "create ROS package for team Gripper"
+    git push origin master
+    ```
+
+10. Nagradno samo za tim trajecotry. Premjestiti startup u vaš ROS paket i pushati svoje promijene na github. 
 
 Citirati:
 ```@article{Markovic2023TowardsAS,
