@@ -16,7 +16,11 @@ windows:
   - arm&takeof:
       layout: tiled
       panes:
-        - waitForRos; waitForOdometry; rosrun ardupilot_gazebo automatic_takeoff.sh
+        - |
+          waitForRos
+          waitForSysStatus
+          waitForSimulation
+          rosrun ardupilot_gazebo automatic_takeoff.sh 2 /$UAV_NAMESPACE/odometry
   - control:
       layout: tiled
       panes:

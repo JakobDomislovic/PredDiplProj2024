@@ -64,6 +64,12 @@ docker run \
   --volume=$XSOCK:$XSOCK:rw \
   --volume=$XAUTH:$XAUTH:rw \
   --env="XAUTHORITY=${XAUTH}" \
+  --volume /dev:/dev \
+  --volume /tmp/.x11-unix:/tmp/.x11-unix \
+  --volume ~/.ssh/ssh_auth_sock:/ssh-agent \
+  --volume $HOME/bags:/root/bags \
+  --volume $HOME/rosbag_default:/root/rosbag_default \
+  --env SSH_AUTH_SOCK=/ssh-agent \
   --env DISPLAY=$DISPLAY \
   --env TERM=xterm-256color \
   --name $full_container_name \
