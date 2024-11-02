@@ -11,8 +11,8 @@ Najčešće naredbe (nemojte ih štrebat, susret ćete ih previše puta):
 - `git add ImeDatoteke` - priprema sve promijenjene datoteke koje želite poslati na Git,
 - `git commit -m "Poruka"` - U navodnicima ide poruka što rade promijene (preporuka u imperativu),
 - `git push origin ImeGrane` - Šaljete (pushate) svoje promijene na Git na željenu granu ImeGrane,
-- `git checkout ImeGrane` - promijena na drugu granu,
-- `git branch -b ImeNoveGrane` - stvaranje nove grane (budite oprezni trebate pushati tu promijenu da bude vidljiva).
+- `git checkout ImeGrane` - promjena na drugu granu,
+- `git branch -b ImeNoveGrane` - stvaranje nove grane (budite oprezni trebate pushati tu promjenu da bude vidljiva).
 
 Postoji još puno naredbi koje možete potražiti na internetu. Za početak predlažem mergeanje izravno na githubu.
 
@@ -32,12 +32,12 @@ Postavljanje ssh ključa. Olakšava korištenje git-a. [HOWTO!](https://docs.git
 - string koji je iskočio kopirajte i zalijepite u githubu ssh-key settings.
 
 **NOTA BENE**
-- nakon promijena uvijek je dobro pregledati koje su stvari izmjenile ili su nove s naredbom:
+- nakon promjena uvijek je dobro pregledati koje su stvari izmijenile ili su nove s naredbom:
     
     ```bash
     git status
     ```
-- nakon svojih promijena uvijek pushajte svoj kod, najčešća špranca prilikom pushanja je da pushate sve svoje promijene:
+- nakon svojih promjena uvijek pushajte svoj kod, najčešća špranca prilikom pushanja je da pushate sve svoje promijene:
     
     ```bash
     git add .
@@ -58,9 +58,9 @@ Postavljanje ssh ključa. Olakšava korištenje git-a. [HOWTO!](https://docs.git
 
 Docker je detaljnije objašnjen u [wiki](https://github.com/larics/docker_files/wiki). Predlažem da prethodni link pročitate u slobodno vrijeme.
 
-Trenutno na ovoj razini možete svhatiti docker kao vrstu virtualne mašine (iako krivo dovoljno dobro prezentira ideju). Koristi se da na brz, efikasan i poprilično lagan način prenosime sustav s jednog robota na drugog. 
+Trenutno na ovoj razini možete shvatiti docker kao vrstu virtualne mašine (iako krivo dovoljno dobro prezentira ideju). Koristi se da na brz, efikasan i poprilično lagan način prenosimo sustav s jednog robota na drugog. 
 
-Primjer, na letjelici smo razvijali sustav cijeli preddiplomski projekt i instalirali smo puno novih biblioteka, posložili puno raznih skripti u sustavu i dva tjedna prije predaje letjelica padne u vodu i sve izgubimo. Koliko nam treba vremena da ponovo posložimo sve to? Sjećamo li se uopće svih promijena? Rješenje: Ako sve te stvari spremimo u docker, na novu letjelicu stavimo sustav u manje od 5min. 
+Primjer, na letjelici smo razvijali sustav cijeli preddiplomski projekt i instalirali smo puno novih biblioteka, posložili puno raznih skripti u sustavu i dva tjedna prije predaje letjelica padne u vodu i sve izgubimo. Koliko nam treba vremena da ponovo posložimo sve to? Sjećamo li se uopće svih promjena? Rješenje: Ako sve te stvari spremimo u docker, na novu letjelicu stavimo sustav u manje od 5min. 
 
 ![](./figure1.png)
 
@@ -80,7 +80,7 @@ Na ovoj razini dovoljno je pratiti naredbe koje će biti u sljedećem poglavlju.
     git clone git@github.com:JakobDomislovic/PredDiplProj2024.git
     cd PredDiplProj2024/
     ```
-2. Podijela u tri tima:
+2. Podijeliti se u tri tima:
     - gripper
     - trajectory
     - vision
@@ -111,15 +111,15 @@ Na ovoj razini dovoljno je pratiti naredbe koje će biti u sljedećem poglavlju.
     ```bash
     ./docker_build.sh
     ```
-10. Pokretanje containera (PRVI PUT OBAVEZNO, dalje preporuceno koristiti ovu skriptu):
+10. Pokretanje containera (PRVI PUT OBAVEZNO, dalje preporučeno koristiti ovu skriptu):
     ```bash
     ./docker_run.sh
     ```
 
 ## Flight stack
-U progamiranju ćete često doći do termina *stack*, to ustvari prestavlja programske blokove koji mogu raditi samostalno, ali kada se povežu čine jedan veći sustav. U nastavku će primjer takvog stacka biti LARICS-ov stack za autonomno letenje.
+U programiranju ćete često doći do termina *stack*, to ustvari predstavlja programske blokove koji mogu raditi samostalno, ali kada se povežu čine jedan veći sustav. U nastavku će primjer takvog stacka biti LARICS-ov stack za autonomno letenje.
 
-Stack je stavljen u docker container te se može lako preuzeti, u njemu su osnovni dijelovi koji su potrebni da bi letjelica letila. U nastavku je slika koja prikazuje dijelove stacka, ne trebate ih znati sve nego je samo dato kao primjer.
+Stack je stavljen u docker container te se može lako preuzeti, u njemu su osnovni dijelovi koji su potrebni da bi letjelica letjela. U nastavku je slika koja prikazuje dijelove stacka, ne trebate ih znati sve nego je samo dato kao primjer.
 ![](./stack.png)
 
 S obzirom da su roboti skupi, a i uvijek smo kratki s vremenom, praksa je da se u robotici sve prvo isproba u simulaciji. Zato ćemo mi koristiti isti taj stack, ali već pretvoren u simulaciju.
@@ -128,7 +128,7 @@ S obzirom da su roboti skupi, a i uvijek smo kratki s vremenom, praksa je da se 
 [Tutorail za tmux](https://github.com/larics/uav_ros_simulation/blob/main/HOWTO.md).
 
 ## Hands-on #2 
-1. Simulacija se pokreće u startup-u. Startup koristimo za različite situacije, npr. testiramo u simulaciji, nakon toga isti kod želimo testirati u laboratoriju i onda opet taj isti kod negdje u šumi. U startup-u ćemo efektivno mjenjati "svijet" i ponašanje letjelice.
+1. Simulacija se pokreće u startup-u. Startup koristimo za različite situacije, npr. testiramo u simulaciji, nakon toga isti kod želimo testirati u laboratoriju i onda opet taj isti kod negdje u šumi. U startup-u ćemo efektivno mijenjati "svijet" i ponašanje letjelice.
 
     ```bash
     ./startup/simulation/start.sh
@@ -136,7 +136,7 @@ S obzirom da su roboti skupi, a i uvijek smo kratki s vremenom, praksa je da se 
 
 2. Gibajte se kroz tmux da pohvatate komande.
 
-3. Na topic `/UAV_NAMESPACE/tracker/input_pose` posaljite tocku na koju zelite da letjelica ide. Koji je UAV_NAMESPACE?
+3. Na topic `/UAV_NAMESPACE/tracker/input_pose` pošaljite točku na koju želite da letjelica ide. Koji je UAV_NAMESPACE?
 
 3. Ugasite tmux.
 
