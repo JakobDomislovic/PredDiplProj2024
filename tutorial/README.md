@@ -7,7 +7,7 @@ Sustav za **verzioniranje koda**. Neizbježan alat ako više ljudi razvija progr
 Najčešće naredbe (nemojte ih štrebat, susret ćete ih previše puta):
 - `git clone git@github.com:AutorImeRepozitorija` - klonira repozitorij lokalno na vaše računalo,
 - `git pull origin ImeGrane` - preuzimate kod (i promijene u njemu) s Git-a s grane ImeGrane,
-- `git status` - pregled promijena koje ste radili naspram onima koje ste preuzeli s Git-a,
+- `git status` - pregled promjena koje ste radili naspram onima koje ste preuzeli s Git-a,
 - `git add ImeDatoteke` - priprema sve promijenjene datoteke koje želite poslati na Git,
 - `git commit -m "Poruka"` - U navodnicima ide poruka što rade promijene (preporuka u imperativu),
 - `git push origin ImeGrane` - Šaljete (pushate) svoje promijene na Git na željenu granu ImeGrane,
