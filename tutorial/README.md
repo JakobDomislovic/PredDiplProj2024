@@ -125,7 +125,11 @@ Stack je stavljen u docker container te se može lako preuzeti, u njemu su osnov
 S obzirom da su roboti skupi, a i uvijek smo kratki s vremenom, praksa je da se u robotici sve prvo isproba u simulaciji. Zato ćemo mi koristiti isti taj stack, ali već pretvoren u simulaciju.
 
 ### TMUX
-[Tutorail za tmux](https://github.com/larics/uav_ros_simulation/blob/main/HOWTO.md).
+[Tutorail za tmux](https://github.com/larics/uav_ros_simulation/blob/main/HOWTO.md). Naše kratice su:
+- kretanje kroz prozore: `shift + ← →`
+- kretanje u prozoru: `ctrl + hjkl`
+- novi prozor: `ctrl+t`
+- gašenje tmux-a: `ctrl+b (pustite) + k`
 
 ## Hands-on #2 
 1. Simulacija se pokreće u startup-u. Startup koristimo za različite situacije, npr. testiramo u simulaciji, nakon toga isti kod želimo testirati u laboratoriju i onda opet taj isti kod negdje u šumi. U startup-u ćemo efektivno mijenjati "svijet" i ponašanje letjelice.
