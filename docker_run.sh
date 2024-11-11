@@ -73,5 +73,5 @@ docker run \
   --env DISPLAY=$DISPLAY \
   --env TERM=xterm-256color \
   --name $full_container_name \
-  preddiplproj2024:$distro \
+  preddiplproj2024:focal-no-gpu \
   /bin/bash
