@@ -35,7 +35,7 @@ do
 
 done
 
-ln -sf $SSH_AUTH_SOCK ~/.ssh/ssh_auth_sock
+sudo ln -sf $SSH_AUTH_SOCK ~/.ssh/ssh_auth_sock
 
 echo "Running in $distro"
 
