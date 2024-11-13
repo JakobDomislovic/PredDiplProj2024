@@ -50,7 +50,7 @@ else
 fi
 
 # Check if using GPU
-gpu_enabled="--gpus all"
+gpu_enabled=""
 if [ "$distro" == "focal-nogpu" ]; then
   gpu_enabled=""
 fi
