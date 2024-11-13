@@ -35,6 +35,8 @@ do
 
 done
 
+ln -sf $SSH_AUTH_SOCK ~/.ssh/ssh_auth_sock
+
 echo "Running in $distro"
 
 # Check if there is an already running container with the same distro
