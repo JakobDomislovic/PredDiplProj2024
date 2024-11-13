@@ -70,6 +70,7 @@ docker run \
   --volume /dev:/dev \
   --volume /tmp/.x11-unix:/tmp/.x11-unix \
   --volume ~/.ssh/ssh_auth_sock:/ssh-agent \
+  --volume ~/.ssh:/root/.ssh \
   --volume $HOME/bags:/root/bags \
   --volume $HOME/rosbag_default:/root/rosbag_default \
   --env SSH_AUTH_SOCK=/ssh-agent \
