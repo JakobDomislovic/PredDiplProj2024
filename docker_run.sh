@@ -35,7 +35,6 @@ do
 
 done
 
-sudo ln -sf $SSH_AUTH_SOCK ~/.ssh/ssh_auth_sock
 
 echo "Running in $distro"
 
@@ -57,6 +56,8 @@ if [ "$distro" == "focal-nogpu" ]; then
   gpu_enabled=""
 fi
 run_args="$gpu_enabled $run_args"
+
+ln -sf $SSH_AUTH_SOCK ~/.ssh/ssh_auth_sock
 
 docker run \
   $run_args \
