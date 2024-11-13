@@ -105,7 +105,7 @@ Na ovoj razini dovoljno je pratiti naredbe koje će biti u sljedećem poglavlju.
 7. U nastavku ćemo stvoriti docker container koji će se koristiti za simulaciju, sve skripte su unaprijed pripremljene, samo ih pokrenite.
 8. U terminal upišite naredbu (radi uštede vremena ovo napravite doma prije sami):
     ```bash
-    docker pull lmark1/uav_ros_simulation:focal-bin-0.2.1
+    docker pull lmark1/uav_ros_simulation:focal-nogpu-bin-0.2.1
     ```
 9. Stvaranje slike iz Dockerfilea, to jest buildanje:
     ```bash
