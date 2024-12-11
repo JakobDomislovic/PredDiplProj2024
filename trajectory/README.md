@@ -24,4 +24,5 @@
     U svrhu vježbe i kasnijih implementacija planiram započeti pisati klasu koja će:
     	a) Stvoriti nasumičan objekt negdje u krugu robota (za početak samo singularna točka)
     	b) Pilotirati letjelicu do točke i pozicionirati ju tako da može uhvatiti gripperom (zasad uzimamo proizvoljnu veličinu grippera)
-    	
+    
+    Dodao sam prvu instancu TestFlight node-a.
