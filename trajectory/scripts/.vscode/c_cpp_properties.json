@@ -1,0 +1,27 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/opt/ros/one/include/**",
+        "/home/luka/catkin_ws/devel/include/**",
+        "/home/luka/catkin_ws/src/lab2_0036546004/include/**",
+        "/home/luka/catkin_ws/src/lab3_0036546004/include/**",
+        "/home/luka/catkin_ws/src/PredDiplProj2024/trajectory/include/**",
+        "/home/luka/catkin_ws/src/turtle_lawnmower/include/**",
+        "/home/luka/catkin_ws/src/turtle_thief_0036546004/include/**",
+        "/home/luka/catkin_ws/src/turtlecontrol/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}
