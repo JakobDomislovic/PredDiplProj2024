@@ -26,3 +26,10 @@
     	b) Pilotirati letjelicu do točke i pozicionirati ju tako da može uhvatiti gripperom (zasad uzimamo proizvoljnu veličinu grippera)
     
     Dodao sam prvu instancu TestFlight node-a.
+    
+##(19.12.2024.) - Luka
+
+    Simulacija i docker rade svim članovima tima.
+    Započeo sam s Python skrpitom koja će za zadanu točku generirati trajektoriju za letjelicu.
+    Trenutno se ne obaziremo na postojanje grippera i letjelicu letimo do zadane točke.
+    
