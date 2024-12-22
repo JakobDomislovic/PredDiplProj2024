@@ -33,3 +33,8 @@
     Započeo sam s Python skrpitom koja će za zadanu točku generirati trajektoriju za letjelicu.
     Trenutno se ne obaziremo na postojanje grippera i letjelicu letimo do zadane točke.
     
+##(22.12.2024.) - Luka
+
+    Radio sam na skripti za generiranje trajektorije.
+    Trenutna verzija iz 3 točke pronalazi jednadžbu 3D ravnine na kojoj će ležati naša parabola.
+    Idući korak je pronalaženje parabole na toj ravnini.
