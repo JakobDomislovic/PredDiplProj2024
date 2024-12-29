@@ -38,3 +38,15 @@
     Radio sam na skripti za generiranje trajektorije.
     Trenutna verzija iz 3 točke pronalazi jednadžbu 3D ravnine na kojoj će ležati naša parabola.
     Idući korak je pronalaženje parabole na toj ravnini.
+    
+##(29.12.2024.) - Luka
+
+    Došlo je do promjene planova s moje strane.
+    Isprava sam imao ideju generirati jednadžbu parabole iz 3 točke, na isti način kako bi se to napravilo matematički.
+    Ali što sam više radio na tome, otkrio sam da mi je to preteško implementirati u Python kod.
+    Novi plan je generirati listu waypoint-ova koji će činiti 'kvaziparabolu'.
+    Danas sam radio na tom kodu, koji je sadržan u novom file-u 'make_trajectory.py'
+    Komentari unutar koda objašnjavaju proces kojim trenutno stvaraom kvaziparabolu.
+    Kad stignem, na GitHub ću staviti sliku i detaljnije objašnjenje koda.
+    Skripta koja iz 3 točke daje jednadžbu ravnine još uvijek postoji, preimenovana u 'plane_from_3_points.py'.
+    

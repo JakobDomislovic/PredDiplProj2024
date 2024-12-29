@@ -5,7 +5,7 @@ from geometry_msgs.msg import Point
 if __name__ == "__main__":
     
     # We can make a parabola using 2 point and a vertex
-    # TODO make it so we can input the point
+    # TODO make it so we can input the point instead of hardcoding it
     start = Point(0,0,0)
     end = Point(2,3,5)
     vertex = Point()
@@ -49,5 +49,3 @@ if __name__ == "__main__":
     # Finally, we have our plane equation
     print("Equation of our plane is:")
     print(f"{a}X + {b}*Y + {c}*Z + {k} = 0")
-
-    # TODO seperate plane calcualtion in a seperate method/function/class
