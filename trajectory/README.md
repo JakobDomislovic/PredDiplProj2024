@@ -2,9 +2,9 @@
 
     Članovi: Luka, Iva
 
-    Ova sekcija projekta bavi se trajektorijom letjelice. Zasad se ovaj tim bavi proučavanjem dostupnih materijala i učenjem programa za izradu trajektorije.
+    Ova sekcija projekta bavi se trajektorijom letjelice.
 
-    U budućnosti projekta, glavni će nam zadatak biti promjena i kompenzacija puta letenja u trenutku kada na letjelicu bude ugrađen novi gripper.
+    Glavni će nam je zadatak promjena i kompenzacija puta letenja u trenutku kada na letjelicu bude ugrađen novi gripper.
 
 ##(05.11.2024.) - Luka
 
@@ -49,4 +49,15 @@
     Komentari unutar koda objašnjavaju proces kojim trenutno stvaraom kvaziparabolu.
     Kad stignem, na GitHub ću staviti sliku i detaljnije objašnjenje koda.
     Skripta koja iz 3 točke daje jednadžbu ravnine još uvijek postoji, preimenovana u 'plane_from_3_points.py'.
+    
+##(30.12.2024.) - Luka
+
+    Nakon još par pokušaja, ipak sam uspio napisati kod za trajektoriju koristeći jednadžbu parabolu.
+    Trenutno rješenje stvara 3. točku (koja nije početna i krajnja) te pomoću dvije polu-parabole stvara waypoints[] listu.
+    Potrebno je još testiranja koda kako bi se osiguralo da radi za sve slučajeve.
+    U nekom ću trenutku napraviti dokument gdje se objašnjava trenutni pristup stvaranju trajektorije, kao i moguće izmjene.
+    Također, vjerujem da je u kodu moguće puno opće optimizacije (u svrhu brzine.)
+    Od Vision team-a nam, zasad, treba samo koordinata točke gdje želimo da letjelica sleti.
+    
+    
     
