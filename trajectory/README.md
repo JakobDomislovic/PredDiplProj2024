@@ -59,5 +59,9 @@
     Također, vjerujem da je u kodu moguće puno opće optimizacije (u svrhu brzine.)
     Od Vision team-a nam, zasad, treba samo koordinata točke gdje želimo da letjelica sleti.
     
+    - Dodatak:
+    Dodao sam PDF s detaljima postupka nalaženja trajektorije.
+    Dodao sam još jedan TODO u kod vezan uz slučaj spuštanja na točku.
+    
     
     

@@ -73,4 +73,6 @@ if __name__ == "__main__":
     for val in waypoints:
         print(f"{val}\n")
 
+#TODO There is no need for a higher vertex in case of end point being much lower than starting point.
+#     In that case, one half-parabola will be sufficient and more efficient.
 #TODO Find a way to return waypoints[] and run it through trajectory_ros_testing.py
