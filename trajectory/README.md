@@ -63,5 +63,18 @@
     Dodao sam PDF s detaljima postupka nalaženja trajektorije.
     Dodao sam još jedan TODO u kod vezan uz slučaj spuštanja na točku.
     
+##(5.1.2025.) - Luka
+    
+    Malo sam doradio kod za stvaranje trajektorije.
+    Sada se density waypoint-ova može birati proizoljnim, pozitivnim integerom.
+    Također sam dodao flag za slučaj da je target point niže od početne točke.
+    U tom slučaju bi teoretski bila dosta jedna polu-parabola, što još treba implementirati, ali nije prvi prioritet.
+    Trenutni glavni zadatak je napraviti da naša skripta može poslati waypoints polje skirpit trajectory_ros_testing.py.
+    Osim toga, potrebno je napraviti transformaciju koordinata unutar make_trajectory.py skripte, tako da su koordinate letjelice uvijek (0,0,0).
+    Konačno, trebamo informacije o tome što da radimo vezano za ostale parametre waypoints polja (rotacija, brzina, akceleracija).
+    
+
+    
+    
     
     
