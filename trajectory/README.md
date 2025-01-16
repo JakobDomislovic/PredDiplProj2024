@@ -1,10 +1,9 @@
-## Trajektorija
+# Trajektorija
+Članovi: Luka, Iva
 
-    Članovi: Luka, Iva
+Ova sekcija projekta bavi se trajektorijom letjelice.
 
-    Ova sekcija projekta bavi se trajektorijom letjelice.
-
-    Glavni će nam je zadatak promjena i kompenzacija puta letenja u trenutku kada na letjelicu bude ugrađen novi gripper.
+Glavni će nam je zadatak promjena i kompenzacija puta letenja u trenutku kada na letjelicu bude ugrađen novi gripper.
 
 ## (05.11.2024.) - Luka
 
