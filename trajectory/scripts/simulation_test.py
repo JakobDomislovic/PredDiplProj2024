@@ -60,7 +60,7 @@ class SimulationTesting:
         start = Point(0, 0, self.current_position.pose.pose.position.z)
         end = Point()
         end.x = target.x - self.current_position.pose.pose.position.x
-        end.y = target.x - self.current_position.pose.pose.position.y
+        end.y = target.y - self.current_position.pose.pose.position.y
         end.z = target.z
         
         # Check if we are descending
@@ -142,7 +142,7 @@ class SimulationTesting:
         return waypoints_true
 
 #--------------------------------------------------------------------------------------------------
-    def create_trajectory(self, target) -> MultiDOFJointTrajectory:
+    def create_trajectory(self, target : Point) -> MultiDOFJointTrajectory:
         multi_dof_trajectory = MultiDOFJointTrajectory()
         waypoints = self.waypoints_generator(target)
         for i in range(0, len(waypoints)):
