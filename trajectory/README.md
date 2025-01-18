@@ -72,8 +72,19 @@ Glavni će nam je zadatak promjena i kompenzacija puta letenja u trenutku kada n
     Osim toga, potrebno je napraviti transformaciju koordinata unutar make_trajectory.py skripte, tako da su koordinate letjelice uvijek (0,0,0).
     Konačno, trebamo informacije o tome što da radimo vezano za ostale parametre waypoints polja (rotacija, brzina, akceleracija).
     
+## (18.1.2025.) - Luka
 
-    
+    Napravio sam novu skrpitu 'simulation_test.py' kojom ćemo testirati u simulaciji.
+    Skrpita je spoj postojećih skripti 'make_trajectory.py' i 'trajectory_ros_testing.py'
+    Trenutna verzija radi, u smislu da se može izvesti u simulaciji i letjelica će pratiti zadane waypoints.
+    Problem je što rezultati trenutno nisu onakvi kakve sam očekivao, letjelica ima čudne kretnje i nekonzistentnu putanju za iste waypoints.
+    Imam par ideja gdje bi mogao bit problem:
+    	- Način na koji se koordinate transofrmiraju iz simulacije u "perspektivu letjelice" unutar 'waypoints_generator' funkcije
+    	- Nedostatak ostalih parametera unutar waypoint-ova (brzina, akceleracija, kutna brzina)
+    	- Način na koji se waypoints lista stvara u programu i predaje letjelici
+    Rješavanje ovih problema je trenutni prioritet trajectory tima.
+    Nakon toga, potrebno je napraviti da ciljnu točku možemo birati sami, bez da je moramo tvrdo kodirati.
+    Trenutno, idealno rješenje za to bila bi još jedna klasa koja publish-a na zaseban topic, zato što ćemo ubuće točku dobivati od vision tima.
     
     
     

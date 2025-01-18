@@ -17,7 +17,7 @@ class SimulationTesting:
     def __init__(self, rate: int, target: Point) -> None:
         
         self.rate: rospy.Rate = rospy.Rate(rate)
-        self.target: Point = target
+        self.target = Point(target[0], target[1], target[2])
         self.tracker_status: str = "idle"
 
         self.current_position = Odometry
@@ -179,7 +179,7 @@ if __name__ == '__main__':
         rospy.init_node('simulation_testing')
         
         rate: int = 1
-        target: Point = [3.0, 3.0, 4.0],
+        target: Point = [3.0, 3.0, 4.0]
         
         traj_testing: SimulationTesting = SimulationTesting(rate, target)
         traj_testing.run()
