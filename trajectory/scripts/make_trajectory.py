@@ -66,6 +66,7 @@ if __name__ == "__main__":
         vi = int(n/2)
     
     ## Waypoints initialization ##
+    waypoints_true = [None]*n
     waypoints = [None]*n
     waypoints[0]   = start
     waypoints[vi]  = vertex
@@ -98,8 +99,15 @@ if __name__ == "__main__":
         for i in range (n-2, vi, -1):
             waypoints[i] = Point(start.x+(i*dx), start.y+(i*dy), a2*((i*dr - vertex_r)**2) + vertex.z)
 
+    for i in range(0, len(waypoints)):
+           temp = [0]*10
+           temp[0] = waypoints[i].x
+           temp[1] = waypoints[i].y
+           temp[2] = waypoints[i].z
+           waypoints_true[i] = temp
+    
     print("Waypoints are:")
-    for val in waypoints:
+    for val in waypoints_true:
         print(f"{val}\n")
 
 #TODO Find a way to return waypoints[] and run it through trajectory_ros_testing.py
