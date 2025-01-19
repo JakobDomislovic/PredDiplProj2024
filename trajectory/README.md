@@ -86,5 +86,15 @@ Glavni će nam je zadatak promjena i kompenzacija puta letenja u trenutku kada n
     Nakon toga, potrebno je napraviti da ciljnu točku možemo birati sami, bez da je moramo tvrdo kodirati.
     Trenutno, idealno rješenje za to bila bi još jedna klasa koja publish-a na zaseban topic, zato što ćemo ubuće točku dobivati od vision tima.
     
+## (19.1.2025.) - Luka
+
+    Mislim da sam otkrio problem iz priješnjeg update-a.
+    Unutar originalne skripte 'make_trajectory.py' sam napravio katastrofalnu grešku zbog koje se waypoints nisu dobro računali u slučaju kad je x i y smjer negativan.
+    Taj problem je sad otkolnjen, i skripta uspješno izbacuje waypoints za sve 4 moguće kombinacije (x,y) kretanja.
+    Također sam prepravio skriptu za simulaciju za isti problem.
+    Sad ću krenuti s testiranjem u simulaciji.
+    Ako sve radi kako treba, na Teams-u bi trebao biti video.
+    
+    
     
     

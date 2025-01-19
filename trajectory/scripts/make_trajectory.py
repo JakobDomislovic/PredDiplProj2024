@@ -7,14 +7,19 @@ from geometry_msgs.msg import Point
 if __name__ == "__main__":
     
     ## Initialization ##
-    #TODO add it so we can input the end point
-    start = Point(0.0, 0.0, 3.0) #For testing, change only z-value
-    end   = Point(3.0, 4.0, -3.0)
+    current = Point( 2.0,-2.0, 1.0)
+    target  = Point(-4.0, 3.0, 7.0)
+    print(f"Current position:\n{current}")
+    print(f"Target position:\n{target}\n")
+
+    ## Transformation of coordinates ##
+    start = Point(0.0, 0.0, current.z)
+    end   = Point(target.x - current.x, target.y - current.y, target.z)
     print(f"Starting point:\n{start}")
     print(f"End point:\n{end}\n")
 
     ## Checks if we are simply descending on a target point ##
-    # In which case, we only have 1 half-parabola
+    # In which case, we only need 1 half-parabola
     if start.z > end.z + 1:
         descending = True
     else:
@@ -22,7 +27,6 @@ if __name__ == "__main__":
     print(f"Descending: {descending}")
 
     ## Trajectory parameters ##
-    # TODO In the ros class, these two should be ROS parameters
     # How much higher will vertex be above target point max height
     overshoot = 1
     if descending:
@@ -31,46 +35,53 @@ if __name__ == "__main__":
         print(f"Overshoot: {overshoot}")
     # Waypoint density - multiplier for number of waypoints in relation to distance
     # Must be an integer
-    k = 2
+    k = 1
     print(f"Waypoint density: {k}\n")
 
 
     ## Vertex calculation ##
     # Currently, we define the vertex to have its (x,y) in between start and end point
     # And its 'z' to be +overshoot above max value
+    vertex = Point()
     if descending:
         vertex = start
     else:
-        vertex = Point()
         vertex.x = (end.x + start.x)/2
         vertex.y = (end.y + start.y)/2
         vertex.z = max(start.z, end.z) + overshoot
-    print(f"Vertex:\n{vertex}\n")
+    print(f"Vertex:\n{vertex}")
+
+    true_vertex = Point(vertex.x + current.x, vertex.y + current.y, vertex.z)
+    print(f"True vertex:\n{true_vertex}\n")
+
+    ## Vector distanes between start and end ##
+    # These are important for later calculation
+    x_dis = (end.x - start.x)
+    y_dis = (end.y - start.y)
+    r_dis = math.sqrt(x_dis**2 + y_dis**2)
 
     ## Number of waypoints ##
     # Currently, we define the number of waypoints as:
     # n = 'k' times the radial distance (rounded) + 1
-    x_dis = abs(end.x - start.x)
-    y_dis = abs(end.y - start.y)
-    r_dis = math.sqrt(x_dis**2 + y_dis**2)
     n = k * int(r_dis) + 1
     # Number of waypoints has to be odd (currently)
     if n%2 == 0:
         n=n-1
     print(f"Number of waypoints: {n}\n")
 
-    ## Vertex index in waypoints[] list ##
+    ## Vertex index ##
     if descending:
         vi = 0
     else:
         vi = int(n/2)
     
     ## Waypoints initialization ##
-    waypoints_true = [None]*n
     waypoints = [None]*n
     waypoints[0]   = start
     waypoints[vi]  = vertex
     waypoints[n-1] = end
+
+    waypoints_true = waypoints
 
     ## Equation parameters ##
     # Distance segments between waypoints
@@ -98,17 +109,18 @@ if __name__ == "__main__":
         #A loop for end > vertex segment
         for i in range (n-2, vi, -1):
             waypoints[i] = Point(start.x+(i*dx), start.y+(i*dy), a2*((i*dr - vertex_r)**2) + vertex.z)
-
-    for i in range(0, len(waypoints)):
-           temp = [0]*10
-           temp[0] = waypoints[i].x
-           temp[1] = waypoints[i].y
-           temp[2] = waypoints[i].z
-           waypoints_true[i] = temp
-    
-    print("Waypoints are:")
-    for val in waypoints_true:
+  
+    print("Waypoints in (start,end) system:")
+    for val in waypoints:
         print(f"{val}\n")
 
-#TODO Find a way to return waypoints[] and run it through trajectory_ros_testing.py
+    ## Inverse system transformation ##
+    print("Waypoints in true system:")
+    for i in range (len(waypoints)):
+        temp = waypoints[i]
+        temp.x = temp.x + current.x
+        temp.y = temp.y + current.y
+        waypoints_true[i] = temp
+        print(f"{temp}\n")
+
 #TODO Coordinates could be rounded (to 2. decimal ideally) to make outputs more readable

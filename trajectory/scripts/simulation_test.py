@@ -58,10 +58,9 @@ class SimulationTesting:
     def waypoints_generator(self, target: Point) -> List:
         # Coordinates need to be shift so that the start is (0,0,z)
         start = Point(0, 0, self.current_position.pose.pose.position.z)
-        end = Point()
-        end.x = target.x - self.current_position.pose.pose.position.x
-        end.y = target.y - self.current_position.pose.pose.position.y
-        end.z = target.z
+        end = Point(target.x - self.current_position.pose.pose.position.x,
+                    target.y - self.current_position.pose.pose.position.y,
+                    target.z)
         
         # Check if we are descending
         if start.z > end.z + 1:
@@ -84,10 +83,12 @@ class SimulationTesting:
             vertex.y = (end.y + start.y)/2
             vertex.z = max(start.z, end.z) + overshoot
 
-        # Number of waypoints
-        x_dis = abs(end.x - start.x)
-        y_dis = abs(end.y - start.y)
+        # Vector distance between start and end
+        x_dis = end.x - start.x
+        y_dis = end.y - start.y
         r_dis = math.sqrt(x_dis**2 + y_dis**2)
+
+        # Number of waypoints
         n = k * int(r_dis) + 1
         if n%2 == 0:
             n=n-1
@@ -99,20 +100,21 @@ class SimulationTesting:
             vi = int(n/2)
 
         # List initialization
-        waypoints_true = [None]*n
         waypoints = [None]*n
         waypoints[0]   = start
         waypoints[vi]  = vertex
         waypoints[n-1] = end
 
+        waypoints_true = waypoints
+
         # Distances between waypoints and radial distances
         dx = x_dis/(n-1)
         dy = y_dis/(n-1)
         dr = r_dis/(n-1)
+        # Radial coordinates of start, end, vertex
         start_r  = math.sqrt( start.x**2 +  start.y**2)
         end_r    = math.sqrt(   end.x**2 +    end.y**2)
         vertex_r = math.sqrt(vertex.x**2 + vertex.y**2)
-
         # Parabola cooeficients
         if not descending:
             a1 = (start.z - vertex.z)/((start_r - vertex_r)**2)
@@ -132,7 +134,7 @@ class SimulationTesting:
                 waypoints[i] = Point(start.x+(i*dx), start.y+(i*dy), a2*((i*dr - vertex_r)**2) + vertex.z)
         
         # Reformating for MultiDOFJointTrajectory and inverse transforming
-        for i in range(0, len(waypoints)):
+        for i in range(len(waypoints)):
            temp = [0]*10
            temp[0] = waypoints[i].x + self.current_position.pose.pose.position.x
            temp[1] = waypoints[i].y + self.current_position.pose.pose.position.y
@@ -179,7 +181,7 @@ if __name__ == '__main__':
         rospy.init_node('simulation_testing')
         
         rate: int = 1
-        target: Point = [3.0, 3.0, 4.0]
+        target: Point = [4.0, 4.0, 6.0]
         
         traj_testing: SimulationTesting = SimulationTesting(rate, target)
         traj_testing.run()
