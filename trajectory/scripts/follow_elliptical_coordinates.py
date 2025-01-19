@@ -8,27 +8,40 @@ from std_msgs.msg import String
 from geometry_msgs.msg import Transform, Twist
 from trajectory_msgs.msg import MultiDOFJointTrajectory, MultiDOFJointTrajectoryPoint
 from make_trajectory import get_waypoints_with_rpy
-from geometry_msgs.msg import Point
+from geometry_msgs.msg import Point, PoseStamped
 
 
 class TrajectoryROSTesting:
     
-    def __init__(self, rate: int, waypoints: List) -> None:
+    def __init__(self, rate: int) -> None:
         
         self.rate: rospy.Rate = rospy.Rate(rate)
-        self.waypoints: List = waypoints
         self.tracker_status: str = "idle"
-        
+
+        self.start  = Point(0.0, 0.0, 3.0)
+        self.target = Point(3.0, 4.0, 3.0)
+
         # subscribers 
         self.tracker_status_sub: rospy.Subscriber = rospy.Subscriber(
             '/duckorange/tracker/status', String, self.tracker_status_cb)
-        # TODO: dodati subscriber za dohvacanje sljedece tocke
-        # TODO: dodati subscriber za dohvacanje trenutne pozicije, tako da
-        #       kreiramo eliptičku trajektoriju u odnosu na to
+        self.tracker_target_sub: rospy.Subscriber = rospy.Subscriber(
+            '/duckorange/tracker/target', Point, self.get_target) # Maybe change the topic
+        self.tracker_target_sub: rospy.Subscriber = rospy.Subscriber(
+            '/duckorange/pose', PoseStamped, self.get_current)
         
         # publishers
         self.traj_pub: rospy.Publisher = rospy.Publisher(
             '/duckorange/tracker/input_trajectory', MultiDOFJointTrajectory, queue_size=1)
+
+    def get_target(self, msg: Point) -> None:
+        # TODO: Add coordinate converter
+        if self.target is None:
+            self.target = msg
+
+    def get_current(self, msg: PoseStamped) -> None:
+        # TODO: Add coordinate converter
+        if self.start is None:
+            self.start = msg.pose.position
 
     def tracker_status_cb(self, msg: String) -> None:
         self.tracker_status = msg.data
@@ -41,27 +54,36 @@ class TrajectoryROSTesting:
         while not rospy.is_shutdown():
             self.rate.sleep()
             if self.tracker_status == "ACCEPT":
-                if not at_endpoint:
-                    print("Tracker status ACCEPT. Publishing trajectory...")
-                    self.publish_trajectory()
-                    at_endpoint = True
-        
-                elif at_endpoint and not landed:
-                    print("At endpoint. Publishing landing trajectory...")
-                    last_waypoint = self.waypoints[-1]
-                    current_position = Point()
-                    current_position.x = last_waypoint[0]
-                    current_position.y = last_waypoint[1]
-                    current_position.z = last_waypoint[2]
-                    self.stop_and_land(current_position)
-                    landed = True
+                if self.start is None or self.target is None:
+                    continue
 
-                else:
-                    print("Landed. Shutting down the node.")
-                    break
+                elif not at_endpoint: # Ready to start the trajectory
+                    print("Tracker status ACCEPT. Publishing trajectory...")
+                    print("Current: ", self.start)
+                    print("Target: ", self.target)
+                    waypoints = get_waypoints_with_rpy(self.start, self.target)
+                    self.publish_trajectory(waypoints)
+                    at_endpoint = True
+
+                elif not landed: # Ended trajectory, landing on the current position
+                    print("At endpoint. Publishing landing trajectory...")
+                    print("Current: ", self.target)
+                    self.stop_and_land(self.target)
+                    self.target = None
+                    self.current = None
+                    landed = True
+                else: # Ended trajectory and landed
+                    if self.target is None: # Next target is not known
+                        print("Landed. Shutting down the node.")
+                        break 
+                    else: # Next target is not known
+                        print("Landed. Continuing to a new target.")
+                        landed = False
+                        at_endpoint = False
+                
     
-    def publish_trajectory(self) -> None:
-        traj = self.create_trajectory(self.waypoints)
+    def publish_trajectory(self, waypoints: List[List]) -> None:
+        traj = self.create_trajectory(waypoints)
         self.traj_pub.publish(traj)
     
     def stop_and_land(self, current_position: Point) -> None:
@@ -108,11 +130,8 @@ if __name__ == '__main__':
         rospy.init_node('trajectory_ros_elliptic')
         
         rate: int = 1
-        start = Point(0.0, 0.0, 3.0)
-        end   = Point(3.0, 4.0, 3.0)
-        waypoints: List = get_waypoints_with_rpy(start, end)
         
-        traj_testing: TrajectoryROSTesting = TrajectoryROSTesting(rate, waypoints)
+        traj_testing: TrajectoryROSTesting = TrajectoryROSTesting(rate)
         traj_testing.run()
     except rospy.ROSInterruptException as e:
         print("ROSInterruptException")

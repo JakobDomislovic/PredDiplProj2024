@@ -5,13 +5,13 @@ import math
 from geometry_msgs.msg import Point
 from typing import List
 
-def get_waypoints(start: Point, end: Point):    
+def get_waypoints(start: Point, end: Point) -> List[Point]:
     ## Initialization ##
     print(f"Starting point:\n{start}")
     print(f"End point:\n{end}\n")
 
     ## Checks if we are simply descending on a target point ##
-    # In which case, we only need 1 half-parabola
+    # In which case, we only have 1 half-parabola
     if start.z > end.z + 1:
         descending = True
     else:
@@ -19,6 +19,7 @@ def get_waypoints(start: Point, end: Point):
     print(f"Descending: {descending}")
 
     ## Trajectory parameters ##
+    # TODO In the ros class, these two should be ROS parameters
     # How much higher will vertex be above target point max height
     overshoot = 1
     if descending:
@@ -27,41 +28,35 @@ def get_waypoints(start: Point, end: Point):
         print(f"Overshoot: {overshoot}")
     # Waypoint density - multiplier for number of waypoints in relation to distance
     # Must be an integer
-    k = 1
+    k = 2
     print(f"Waypoint density: {k}\n")
 
 
     ## Vertex calculation ##
     # Currently, we define the vertex to have its (x,y) in between start and end point
     # And its 'z' to be +overshoot above max value
-    vertex = Point()
     if descending:
         vertex = start
     else:
+        vertex = Point()
         vertex.x = (end.x + start.x)/2
         vertex.y = (end.y + start.y)/2
         vertex.z = max(start.z, end.z) + overshoot
-    print(f"Vertex:\n{vertex}")
-
-    true_vertex = Point(vertex.x + current.x, vertex.y + current.y, vertex.z)
-    print(f"True vertex:\n{true_vertex}\n")
-
-    ## Vector distanes between start and end ##
-    # These are important for later calculation
-    x_dis = (end.x - start.x)
-    y_dis = (end.y - start.y)
-    r_dis = math.sqrt(x_dis**2 + y_dis**2)
+    print(f"Vertex:\n{vertex}\n")
 
     ## Number of waypoints ##
     # Currently, we define the number of waypoints as:
     # n = 'k' times the radial distance (rounded) + 1
+    x_dis = abs(end.x - start.x)
+    y_dis = abs(end.y - start.y)
+    r_dis = math.sqrt(x_dis**2 + y_dis**2)
     n = k * int(r_dis) + 1
     # Number of waypoints has to be odd (currently)
     if n%2 == 0:
         n=n-1
     print(f"Number of waypoints: {n}\n")
 
-    ## Vertex index ##
+    ## Vertex index in waypoints[] list ##
     if descending:
         vi = 0
     else:
@@ -72,8 +67,6 @@ def get_waypoints(start: Point, end: Point):
     waypoints[0]   = start
     waypoints[vi]  = vertex
     waypoints[n-1] = end
-
-    waypoints_true = waypoints
 
     ## Equation parameters ##
     # Distance segments between waypoints
@@ -101,8 +94,8 @@ def get_waypoints(start: Point, end: Point):
         #A loop for end > vertex segment
         for i in range (n-2, vi, -1):
             waypoints[i] = Point(start.x+(i*dx), start.y+(i*dy), a2*((i*dr - vertex_r)**2) + vertex.z)
-  
-    print("Waypoints in (start,end) system:")
+
+    print("Waypoints are:")
     for val in waypoints:
         val.x = round(val.x, 2)
         val.y = round(val.y, 2)
@@ -126,4 +119,3 @@ if __name__ == "__main__":
     end   = Point(3.0, 4.0, 3.0)
 
     waypoints = get_waypoints(start, end)
-

@@ -104,6 +104,11 @@ Glavni će nam je zadatak promjena i kompenzacija puta letenja u trenutku kada n
     - subscriber za primanje sljedece tocke, tako da se trajektorija racuna u odnosu na to.
       Na ovaj topic bismo se trebali povezati s timom Vision.
     Sto napraviti s brzinom, akceleracijom i rotacijom?
-    
-    
-    
+
+## (19.1.2025.) - Iva
+
+    Dodan subscriber za target i za trenutnu poziciju.
+    Popravljene neke greske.
+    Treba:
+    - Spojjiti s coordinate converter Vision tima
+    - jednom kad to proradi, provjeriti radi li generiranje trajektorije u elipsi ispravno
