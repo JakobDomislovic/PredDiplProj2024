@@ -95,6 +95,15 @@ Glavni će nam je zadatak promjena i kompenzacija puta letenja u trenutku kada n
     Sad ću krenuti s testiranjem u simulaciji.
     Ako sve radi kako treba, na Teams-u bi trebao biti video.
     
+## (18.1.2025.) - Iva
+
+    Dron može poletjeti i sletjeti po trajektoriji elipse. Skripta spojena na simulaciju. 
+    Skripta se zove follow_elliptical_coordinates.py
+    Potrebno je još napisati subscriber za sljedece stvari:
+    - subscriber za trenutnu poziciju drona (tako da se trajektorija moze racunati u odnosu na to, a ne hardkodirano)
+    - subscriber za primanje sljedece tocke, tako da se trajektorija racuna u odnosu na to.
+      Na ovaj topic bismo se trebali povezati s timom Vision.
+    Sto napraviti s brzinom, akceleracijom i rotacijom?
     
     
     

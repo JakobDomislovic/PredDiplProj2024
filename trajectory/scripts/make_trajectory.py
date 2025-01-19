@@ -3,18 +3,10 @@
 # Code currently assumes (x,y) of start are always (0,0)
 import math
 from geometry_msgs.msg import Point
+from typing import List
 
-if __name__ == "__main__":
-    
+def get_waypoints(start: Point, end: Point):    
     ## Initialization ##
-    current = Point( 2.0,-2.0, 1.0)
-    target  = Point(-4.0, 3.0, 7.0)
-    print(f"Current position:\n{current}")
-    print(f"Target position:\n{target}\n")
-
-    ## Transformation of coordinates ##
-    start = Point(0.0, 0.0, current.z)
-    end   = Point(target.x - current.x, target.y - current.y, target.z)
     print(f"Starting point:\n{start}")
     print(f"End point:\n{end}\n")
 
@@ -112,15 +104,26 @@ if __name__ == "__main__":
   
     print("Waypoints in (start,end) system:")
     for val in waypoints:
+        val.x = round(val.x, 2)
+        val.y = round(val.y, 2)
+        val.z = round(val.z, 2)
         print(f"{val}\n")
+    return waypoints
 
-    ## Inverse system transformation ##
-    print("Waypoints in true system:")
-    for i in range (len(waypoints)):
-        temp = waypoints[i]
-        temp.x = temp.x + current.x
-        temp.y = temp.y + current.y
-        waypoints_true[i] = temp
-        print(f"{temp}\n")
 
-#TODO Coordinates could be rounded (to 2. decimal ideally) to make outputs more readable
+def get_waypoints_with_rpy(start: Point, end: Point) -> List[List]:
+    waypoints = get_waypoints(start, end)
+    new_waypoints = []
+    for val in waypoints:
+        # x,    y,    z,    R,    P,    Y,   vel_xy, acc_xy, vel_z, acc_z
+        point = [val.x, val.y, val.z, 0, 0, 0, 0, 0, 0, 0]
+        new_waypoints.append(point)
+    return new_waypoints
+
+
+if __name__ == "__main__":
+    start = Point(0.0, 0.0, 3.0) #For testing, change only z-value
+    end   = Point(3.0, 4.0, 3.0)
+
+    waypoints = get_waypoints(start, end)
+
