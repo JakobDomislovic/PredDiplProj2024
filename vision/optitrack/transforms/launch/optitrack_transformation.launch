@@ -1,0 +1,16 @@
+<launch>
+    <!-- Launch the TF broadcaster for circular drone movement -->
+
+    <!--<include file="$(find usb_cam)/launch/usb_cam.launch"/> 
+
+    <include file="$(find aruco_ros)/launch/single.launch"/> -->
+    <node pkg="transforms" type="optitrack_transformation.py" name="optitrack_transformation" output="screen" />
+
+
+    <!-- Launch the robot_state_publisher to load the URDF -->
+    <param name="robot_description" textfile="$(find transforms)/urdf/dron.urdf" />
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" />
+
+    
+</launch>
+

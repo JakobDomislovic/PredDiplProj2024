@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="drone_with_camera_gripper">
+
+  <!-- Drone base link -->
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.5 0.5 0.1"/> <!-- Example dimensions for the drone -->
+      </geometry>
+      <material name="blue"/>
+    </visual>
+  </link>
+
+  <!-- Camera link -->
+  <link name="camera_link">
+    <visual>
+      <geometry>
+        <cylinder length="0.1" radius="0.02"/> <!-- Example camera shape -->
+      </geometry>
+      <material name="red"/>
+    </visual>
+  </link>
+
+  <!-- Static transform from drone base (base_link) to camera (camera_link) -->
+  <joint name="base_to_camera" type="fixed">
+    <parent link="base_link"/>
+    <child link="camera_link"/>
+    <origin xyz="0.1 0.0 0.2" rpy="0 0 0"/> <!-- Adjust position and orientation -->
+  </joint>
+
+  <!-- Gripper link -->
+  <link name="gripper_link">
+    <visual>
+      <geometry>
+        <box size="0.2 0.05 0.05"/> <!-- Example gripper shape -->
+      </geometry>
+      <material name="green"/>
+    </visual>
+  </link>
+
+  <!-- Static transform from drone base (base_link) to gripper (gripper_link) -->
+  <joint name="base_to_gripper" type="fixed">
+    <parent link="base_link"/>
+    <child link="gripper_link"/>
+    <origin xyz="0.3 0.0 -0.1" rpy="0 0 0"/> <!-- Adjust position and orientation -->
+  </joint>
+
+</robot>
