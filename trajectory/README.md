@@ -112,3 +112,7 @@ Glavni će nam je zadatak promjena i kompenzacija puta letenja u trenutku kada n
     Treba:
     - Spojjiti s coordinate converter Vision tima
     - jednom kad to proradi, provjeriti radi li generiranje trajektorije u elipsi ispravno
+    
+## (22.2.2025.) - Luka
+
+    Popravljena make_trajectory.py skripta tako da radi u svim smjerovima i za bilo koje točke cilja i pozicije.

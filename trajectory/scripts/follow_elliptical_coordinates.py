@@ -19,7 +19,7 @@ class TrajectoryROSTesting:
         self.tracker_status: str = "idle"
 
         self.start  = Point(0.0, 0.0, 3.0)
-        self.target = Point(3.0, 4.0, 3.0)
+        self.target = Point(3.0, 4.0, 5.0)
 
         # subscribers 
         self.tracker_status_sub: rospy.Subscriber = rospy.Subscriber(
